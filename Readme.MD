@@ -101,8 +101,8 @@ Esta API permite que os usuários consultem fornecedores de energia elétrica co
 1. Clone este repositório:
 
    ```bash
-   git clone <URL-DO-REPOSITORIO>
-   cd <NOME-DO-REPOSITORIO>
+   git clone https://github.com/ImGlic/api_consult-energy.git
+   cd api_consult-energy
    ```
 
 2. Instale as dependências:
