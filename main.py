@@ -36,9 +36,19 @@ fornecedores = [
 ]
 
 @app.get("/fornecedores", response_model=List[Fornecedor])
-def get_fornecedores():
+def get_fornecedores(): 
     return fornecedores
 
 @app.post("/escolha")
 def escolher_fornecedor(consumo: int):
     return [f for f in fornecedores if consumo >= f.limite_minimo_kwh]
+
+
+@app.post("/add_fornecedor", response_model=Fornecedor)
+def adicionar_fornecedor(fornecedor: Fornecedor):
+    for f in fornecedores:
+        if f.nome == fornecedor.nome:
+            raise HTTPException(status_code=400, detail="Fornecedor já existe")
+    
+    fornecedores.append(fornecedor)
+    return fornecedor
