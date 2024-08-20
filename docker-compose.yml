@@ -1,0 +1,9 @@
+version: "3.9"
+
+services:
+  consult_energy_backend:
+    container_name: consult_energy_backend
+    build:
+      context: .
+    ports:
+      - 5174:8000
