@@ -1,7 +1,9 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, File, UploadFile, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from typing import List
+import shutil
+import os
 
 app = FastAPI()
 
@@ -52,3 +54,18 @@ def adicionar_fornecedor(fornecedor: Fornecedor):
     
     fornecedores.append(fornecedor)
     return fornecedor
+
+UPLOAD_DIR = os.path.join(os.getcwd(), "assets")
+if not os.path.exists(UPLOAD_DIR):
+    os.makedirs(UPLOAD_DIR)
+
+@app.post("/upload-logo/")
+async def upload_logo(file: UploadFile = File(...)):
+    file_location = os.path.join(UPLOAD_DIR, file.filename)
+    try:
+        with open(file_location, "wb") as f:
+            shutil.copyfileobj(file.file, f)
+    except Exception as e:
+        raise HTTPException(status_code=500, detail="Failed to save file")
+
+    return {"filename": file.filename}
