@@ -1,7 +1,7 @@
 version: "3.9"
 
 services:
-  consult_energy:
+  consult_energy_api:
     container_name: consult_energy_backend
     build:
       context: .
