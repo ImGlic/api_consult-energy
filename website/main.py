@@ -39,12 +39,12 @@ fornecedores = [
 def get_fornecedores(): 
     return fornecedores
 
-@app.post("/fornecedor/consultar")
+@app.post("/fornecedores/consultar")
 def escolher_fornecedor(consumo: int):
     return [f for f in fornecedores if consumo >= f.limite_minimo_kwh]
 
 
-@app.post("/forneceodor/adicionar", response_model=Fornecedor)
+@app.post("/fornecedores/adicionar", response_model=Fornecedor)
 def adicionar_fornecedor(fornecedor: Fornecedor):
     for f in fornecedores:
         if f.nome == fornecedor.nome:
